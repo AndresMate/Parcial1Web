@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<%- include('./templates/header.ejs')%>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header"><h1 style="text-align: center"><%= title %></h1></div>
+        <div class="card-body">
+            <form id="carForm">
+                <div class="mb-3">
+                    <label for="idCar" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="idCar" name="id">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="modeloCar">Modelo</label>
+                    <input type="text" class="form-control" id="modeloCar" name="modelo">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="placaCar">Placa</label>
+                    <input type="text" class="form-control" id="placaCar" name="placa">
+                </div>
+                <div class="mb-3">
+                    <label for="departmentSelect" class="form-label">Departamento</label>
+                    <select id="departmentSelect" class="form-select" name="department">
+                        <option value="">Selecciona un departamento</option>
+                        <% departments.sort((a, b) => a.name.localeCompare(b.name)).forEach(dept => { %>
+                            <option value="<%= dept.code %>"><%= dept.name %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="townSelect" class="form-label">Municipio</label>
+                    <select id="townSelect" class="form-select" name="town">
+                        <option value="">Selecciona un municipio</option>
+
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" id="btnSend">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header"><h2 style="text-align: center">Registros</h2></div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID Carro</th>
+                    <th>Modelo</th>
+                    <th>Placa</th>
+                    <th>Departamento</th>
+                    <th>Municipio</th>
+                </tr>
+                </thead>
+                <tbody id="recordsTableBody">
+                <% data.forEach((item) => { %>
+                    <tr>
+                        <td><%= item.id %></td>
+                        <td><%= item.modelo %></td>
+                        <td><%= item.placa %></td>
+                        <td><%= item.department %></td>
+                        <td><%= item.town %></td>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<% include('./templates/footer.ejs') %>
+<script src="js/scripts.js"></script>
+</body>
+</html>

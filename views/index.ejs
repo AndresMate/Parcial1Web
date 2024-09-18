@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<%- include('./templates/header.ejs')%>
+<body>
+<h1>Ejemplo de view engine EJS</h1>
+
+<div>
+    <% if (data.size > 0) { %>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID Carro</th>
+                <th>Modelo</th>
+                <th>Placa</th>
+                <th>Departamento</th>
+                <th>Ciudad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% data.forEach((item) => { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.modelo %></td>
+                    <td><%= item.placa %></td>
+                    <td><%= item.department %></td>
+                    <td><%= item.town %></td>
+                    <td>
+                        <button onclick="window.location.href='/edit/<%= item.id %>'" class="btn btn-warning">Editar</button>
+                        <button onclick="deleteCar('<%= item.id %>')" class="btn btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+        <button onclick="window.location.href='/new-record'" class="btn btn-primary">Agregar Nuevo Carro</button>
+    <% } else { %>
+        <button onclick="window.location.href='/new-record'" class="btn btn-primary">Agregar Nuevo Carro</button>
+    <% } %>
+</div>
+<% include('./templates/footer.ejs') %>
+</body>
+</html>
