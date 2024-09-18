@@ -34,13 +34,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const departmentSelect = document.getElementById('departmentSelect');
     const townSelect = document.getElementById('townSelect');
 
-    fetch('/api/towns')
-        .then(response => response.json())
+    fetch('http://localhost:3000/new-record')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Towns data:', data); // Log the towns data
             window.towns = data;
 
             departmentSelect.addEventListener('change', function () {
+                console.log('Change event triggered'); // Log when the change event is triggered
                 const departmentCode = this.value;
+                console.log('Selected department:', departmentCode); // Log the selected department
                 const filteredTowns = window.towns.filter(town => town.department === departmentCode);
                 filteredTowns.sort((a, b) => a.name.localeCompare(b.name));
 

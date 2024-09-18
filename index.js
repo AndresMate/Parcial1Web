@@ -14,6 +14,15 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 app.use('/',require('./routes/index'));
 
+app.post('/new-record',(req,res)=>{
+    const { id, modelo, placa, department, town } = req.body;
+
+    const newRecord = { id, modelo, placa, department, town };
+
+    res.status(201).json(newRecord);
+
+})
+
 app.listen(app.get('PORT'), () => {
     console.log(`Server is ready at http://localhost:${app.get('PORT')} in ${app.get('env')} mode`);
 });
